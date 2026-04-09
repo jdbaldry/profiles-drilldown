@@ -406,6 +406,12 @@ export class SceneProfilesExplorer extends SceneObjectBase<SceneProfilesExplorer
       if (item) {
         this.resetDiffTimeRangeAnnotations();
       }
+
+      if (item?.queryRunnerParams?.spanSelector) {
+        sceneGraph
+          .findByKeyAndType(this, 'spanSelector', SpanSelectorVariable)
+          .changeValueTo(item.queryRunnerParams.spanSelector);
+      }
     }
 
     this.setState({
@@ -446,9 +452,11 @@ export class SceneProfilesExplorer extends SceneObjectBase<SceneProfilesExplorer
     // preserve existing filters only when switching to "Labels", "Flame graph" or "Diff flame graph"
     // if not, they will be added to the queries without any notice on the UI
     if (
-      ![ExplorationType.LABELS, ExplorationType.FLAME_GRAPH, ExplorationType.DIFF_FLAME_GRAPH].includes(
-        nextExplorationType as ExplorationType
-      )
+      ![
+        ExplorationType.LABELS,
+        ExplorationType.FLAME_GRAPH,
+        ExplorationType.DIFF_FLAME_GRAPH,
+      ].includes(nextExplorationType as ExplorationType)
     ) {
       sceneGraph.findByKeyAndType(this, 'filters', FiltersVariable).reset();
     }

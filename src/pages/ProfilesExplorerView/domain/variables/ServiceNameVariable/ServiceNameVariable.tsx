@@ -12,12 +12,13 @@ import { Cascader, Icon, Tooltip, useStyles2 } from '@grafana/ui';
 import { prepareHistoryEntry } from '@shared/domain/prepareHistoryEntry';
 import { reportInteraction } from '@shared/domain/reportInteraction';
 import { userStorage } from '@shared/infrastructure/userStorage';
-import { nanoid } from 'nanoid';
 import React, { useMemo } from 'react';
 import { lastValueFrom } from 'rxjs';
 
 import { PYROSCOPE_SERIES_DATA_SOURCE } from '../../../infrastructure/pyroscope-data-sources';
 import { buildServiceNameCascaderOptions } from './domain/useBuildServiceNameOptions';
+
+const SERVICE_NAME_LABEL_DEFAULT = 'Service';
 
 type QueryVariableInitialState = ConstructorParameters<typeof QueryVariable>[0];
 
@@ -44,7 +45,7 @@ export class ServiceNameVariable extends QueryVariable {
     super({
       key: 'serviceName',
       name: 'serviceName',
-      label: t('variables.service-name.label', 'Service'),
+      label: SERVICE_NAME_LABEL_DEFAULT,
       datasource: PYROSCOPE_SERIES_DATA_SOURCE,
       query: ServiceNameVariable.QUERY_DEFAULT,
       // Must be false so SceneByVariableRepeaterGrid.onActivate can call update().
@@ -62,6 +63,7 @@ export class ServiceNameVariable extends QueryVariable {
   }
 
   onActivate() {
+    this.setState({ label: t('variables.service-name.label', SERVICE_NAME_LABEL_DEFAULT) });
     this.setInitialValue();
 
     this.subscribeToState((newState, prevState) => {
@@ -187,7 +189,7 @@ export class ServiceNameVariable extends QueryVariable {
             // we add a key to ensure that the Cascader selects the initial value properly when landing on the page
             // and when switching exploration types, because the value might also be changed after the component has been rendered by SceneProfilesExplorer
             // (e.g. in SceneExploreServiceProfileTypes)
-            key={nanoid(5)}
+            key={crypto.randomUUID()}
             aria-label={t('variables.service-name.aria-label', 'Services list')}
             width={32}
             separator="/"

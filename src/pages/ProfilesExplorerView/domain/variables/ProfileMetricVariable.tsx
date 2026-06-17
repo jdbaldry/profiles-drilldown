@@ -7,11 +7,12 @@ import { localeCompare } from '@shared/domain/localeCompare';
 import { prepareHistoryEntry } from '@shared/domain/prepareHistoryEntry';
 import { reportInteraction } from '@shared/domain/reportInteraction';
 import { getProfileMetric, ProfileMetricId } from '@shared/infrastructure/profile-metrics/getProfileMetric';
-import { nanoid } from 'nanoid';
 import React, { useMemo } from 'react';
 import { lastValueFrom } from 'rxjs';
 
 import { PYROSCOPE_SERIES_DATA_SOURCE } from '../../infrastructure/pyroscope-data-sources';
+
+const PROFILE_METRIC_LABEL_DEFAULT = 'Profile type';
 
 type ProfileMetricOptions = Array<{
   value: string;
@@ -38,7 +39,7 @@ export class ProfileMetricVariable extends QueryVariable {
     super({
       key: 'profileMetricId',
       name: 'profileMetricId',
-      label: t('variables.profile-metric.label', 'Profile type'),
+      label: PROFILE_METRIC_LABEL_DEFAULT,
       datasource: PYROSCOPE_SERIES_DATA_SOURCE,
       query: ProfileMetricVariable.QUERY_DEFAULT,
       loading: true,
@@ -52,9 +53,10 @@ export class ProfileMetricVariable extends QueryVariable {
   }
 
   onActivate() {
-    if (!this.state.value) {
-      this.setState({ value: ProfileMetricVariable.DEFAULT_VALUE });
-    }
+    this.setState({
+      label: t('variables.profile-metric.label', PROFILE_METRIC_LABEL_DEFAULT),
+      ...(!this.state.value ? { value: ProfileMetricVariable.DEFAULT_VALUE } : {}),
+    });
   }
 
   async update(force = false) {
@@ -133,7 +135,7 @@ export class ProfileMetricVariable extends QueryVariable {
       <Cascader
         // we add a key to ensure that the Cascader selects the initial value or available options properly when landing on the page
         // and when switching exploration types, because the value might also be changed after the component has been rendered by SceneProfilesExplorer
-        key={nanoid(5)}
+        key={crypto.randomUUID()}
         aria-label={t('variables.profile-metric.aria-label', 'Profile metrics list')}
         width={24}
         separator="/"

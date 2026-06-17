@@ -1,5 +1,114 @@
 # Changelog
 
+## 2.0.7
+
+##### Chores
+
+*  Update ci-cd-workflows (#987) (3de7b007)
+*  update Saved queries texts (#1006) (500d8d73)
+*  Harden package use and workspace environment (#984) (1ace8a94)
+*  Fix translations (#986) (b58dea2d)
+*  Use tabs instead of custom menu navigation (#974) (59c90d52)
+
+##### New Features
+
+*  Support add to dashboard (#970) (667d2a21)
+
+##### Bug Fixes
+
+*  update Crowdin workflows for get-vault-secrets breaking change (#1008) (86eabe59)
+* **Recording Rules:**  Stop dropping profile type, service name, and function name on submit (#979) (c1d75858)
+
+##### Other Changes
+
+*  Download translations from Crowdin (#993) (5e02932b)
+*  Download translations from Crowdin (#953) (ff04cc53)
+
+
+## 2.0.6
+
+##### Chores
+
+* **deps:**
+  *  bump protobufjs from 8.0.1 to 8.0.3 (#976) (9fdea055)
+  *  update dependency protobufjs@^7.3.0 to v8 [security] (#972) (f4a4eea9)
+  *  lock file maintenance (#969) (6b3f68a2)
+  *  bump hono from 4.12.16 to 4.12.18 (#966) (b6edc18f)
+  *  bump fast-uri from 3.1.1 to 3.1.2 (#967) (107f6c96)
+  *  pin dependencies (#958) (8ac3c790)
+  *  lock file maintenance (#926) (8ff0c056)
+  *  update alpine:latest docker digest to 5b10f43 (#959) (4115a9ef)
+  *  update golang:1.26 docker digest to b54cbf5 (#960) (7fcafe6c)
+*  Update rideshare mod (#971) (f92c3079)
+*  Update which feature flags are on by default (#965) (fd0ee099)
+*  Fix loading translations before i18n available (#963) (87519cbf)
+*  fix tests (#962) (1dc0d256)
+
+##### New Features
+
+* **time picker:**  add support for keyboard shortcuts (#936) (2965dbb3)
+
+##### Bug Fixes
+
+*  Download json (#975) (e7fdec78)
+
+##### Other Changes
+
+*  occured -> occurred in AI panel error message (#968) (dcb321f9)
+
+
+## 2.0.5
+
+##### Build System / Dependencies
+
+*  migrate to pnpm (#949) (c26b6a84)
+
+##### Chores
+
+*  Update @grafana/flamegraph to 13.1.0-25141410377 (#957) (0464d5bf)
+*  Use OpenFeature for all feature flags (#950) (75caf58d)
+* **deps:**  bump postcss from 8.4.39 to 8.5.12 (#954) (bbe86aaf)
+* **i18n:**  Expose all supported languages in plugin.json (#904) (37bdb2b6)
+
+##### New Features
+
+*  Use Grafana Assistant for Optimize Code button when available (#943) (284dc66f)
+
+##### Bug Fixes
+
+*  Revert changes to analyze flame graph button in SceneFlameGraph (#955) (c3d03d93)
+*  consolidate CI/CD into single workflow to fix broken `workflow_run` chaining (#956) (218f43eb)
+
+##### Other Changes
+
+*  Download translations from Crowdin (#951) (4ff76d61)
+
+##### Performance Improvements
+
+* **i18n:**  prevent loading en-US translations at runtime (#938) (be0806e6)
+
+
+## 2.0.4
+
+##### Chores
+
+* **deps:**
+  *  update dependency dompurify to v3.4.0 [security] (#942) (0487f527)
+  *  update dependency hono to v4.12.14 [security] (#941) (2c403fcf)
+
+##### New Features
+
+* **adhoc:**  add diff view with side-by-side and computed diff modes (#842) (d4461470)
+
+##### Bug Fixes
+
+* **deps:**
+  *  patch CVEs via yarn resolutions (#948) (5624f69b)
+  *  update dependency protobufjs to v8 [security] (#946) (04b77a2f)
+  *  update module go.opentelemetry.io/otel/sdk to v1.43.0 [security] (#933) (63e52289)
+* **samples:**  upgrade otel/sdk to v1.43.0 to address CVE (#940) (fbf87a0c)
+
+
 ## 2.0.3
 
 ##### Chores

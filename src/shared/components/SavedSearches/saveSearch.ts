@@ -1,10 +1,10 @@
 import { config } from '@grafana/runtime';
 import { SceneObject } from '@grafana/scenes';
 import { DataQuery } from '@grafana/schema';
+import { getQueryLibraryFromOpenFeature } from '@shared/infrastructure/featureFlags/featureFlags';
 import { logger } from '@shared/infrastructure/tracking/logger';
 import { ReactNode, useCallback, useState } from 'react';
 import semver from 'semver/preload';
-import { v4 as uuidv4 } from 'uuid';
 
 import pluginJson from '../../../plugin.json';
 import {
@@ -17,7 +17,7 @@ import {
 const MIN_VERSION = '12.4.0-21256324731';
 
 export function isQueryLibrarySupported() {
-  return !semver.ltr(config.buildInfo.version, MIN_VERSION) && config.featureToggles.queryLibrary;
+  return !semver.ltr(config.buildInfo.version, MIN_VERSION) && getQueryLibraryFromOpenFeature();
 }
 
 export function useCheckForExistingSearch(dsUid: string, query: string) {
@@ -131,7 +131,7 @@ function saveInLocalStorage({ query, title, description, dsUid }: Omit<SavedSear
     query,
     timestamp: new Date().getTime(),
     title,
-    uid: uuidv4(),
+    uid: crypto.randomUUID(),
   });
 
   localStorage.setItem(SAVED_SEARCHES_KEY, JSON.stringify(stored));

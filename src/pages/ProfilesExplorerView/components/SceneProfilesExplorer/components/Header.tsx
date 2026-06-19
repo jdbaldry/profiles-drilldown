@@ -237,12 +237,12 @@ const getStyles = (theme: GrafanaTheme2, chromeHeaderHeight: number, isEmbedded:
     }
 
     &.filters {
-      flex-grow: 1;
+      flex: 1 1 0;
     }
 
     &.filtersAllServices {
       // Set to 2 to add priority over quick-filter.
-      flex-grow: 2;
+      flex: 2 1 0;
     }
 
     &.compare-presets {
@@ -267,7 +267,7 @@ const getStyles = (theme: GrafanaTheme2, chromeHeaderHeight: number, isEmbedded:
     margin-bottom: 0;
 
     &#quick-filter {
-      flex-grow: 1;
+      flex: 1 1 0;
       min-width: 112px;
     }
   `,
